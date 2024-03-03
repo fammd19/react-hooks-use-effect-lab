@@ -2,26 +2,22 @@ import React, { useState, useEffect } from "react";
 
 function Question({ question, onAnswered }) {
   const [timeRemaining, setTimeRemaining] = useState(10);
-  // add useEffect code
 
-  useEffect (() => {
-    if (timeRemaining === 0) {
+  // add useEffect code
+  useEffect(() => {
+    if (timeRemaining===0) {
       setTimeRemaining(10);
       onAnswered(false);
-      return; // exit early!
+    return
     }
 
-    // set up a timeout to runS after 1 second
-    const timerId = setTimeout(() => {
-      // decrement the time remaining
-      setTimeRemaining((timeRemaining) => timeRemaining - 1);
-    }, 1000);
+    const timerId = setTimeout(()=>{
+      setTimeRemaining((timeRemaining)=> timeRemaining-1)}, 1000);
 
-    // clean up after the timeout in case the component unmounts before the timer is done
     return function () {
-      clearTimeout(timerId);
-    };
-}, [timeRemaining, onAnswered])
+      clearTimeout(timerId)
+    }
+  }, [timeRemaining, onAnswered])
 
   function handleAnswer(isCorrect) {
     setTimeRemaining(10);
